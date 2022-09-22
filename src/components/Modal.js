@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Modal({open})
 {
+	const [name, setName] = useState("")
+
 	function saveItem()
 	{
-		let value = document.getElementById("titleInput").value
 		fetch('https://localhost:7242/api/todoitems',
 			{
 				method: 'POST',
@@ -12,7 +13,7 @@ function Modal({open})
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					title: value,
+					title: name,
 					isComplete: false
 				})
 			})
@@ -25,7 +26,7 @@ function Modal({open})
 				<h2>Create a task today:</h2>
 				<form action="">
 					<div className="field-wrap">
-						<input className="field" type="text" id="titleInput" placeholder="Title.."/>
+						<input className="field" value={name} onChange={(e) => setName(e.target.value)} type="text" id="titleInput" placeholder="Title.."/>
 					</div>
 					<button className="btn-wrap align-right">
 						<input className="btn" type="submit" value="Create" onClick={saveItem}/>

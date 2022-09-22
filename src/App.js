@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import Archive from './components/Archive';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Item from './components/Item';
@@ -34,12 +35,25 @@ function App() {
   useEffect(() => {
     for (let i = 0; i < items.length; i++)
     {
-      if (items[i].date !== getTime() && items[i].isChecked)
+      if (items[i].date !== getTime() && items[i].isComplete)
       {
         var id = items[i].id
         var url = `https://localhost:7242/api/todoitems/${id}`
-        fetch(url, {method: 'DELETE'})
+        fetch(url, {method: 'DELETE',})
       }
+    }
+  })
+
+  let completed = [];
+  let notCompleted = [];
+  items.forEach((el) => {
+    if (el.isComplete === true)
+    {
+      completed.push(el)
+    }
+    else
+    {
+      notCompleted.push(el)
     }
   })
 
@@ -50,8 +64,9 @@ function App() {
       <main className="main">
         <div className="wrap">
           <ul>
-            {items.map(el => <li key={el.id}><Item data={el}/></li>)}
+            {notCompleted.map(el => <li key={el.id}><Item data={el}/></li>)}
           </ul>
+          <Archive list={completed}/>
         </div>
       </main>
       <Footer/>

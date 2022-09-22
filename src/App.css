@@ -284,7 +284,6 @@ display: -webkit-flex;
 display: -ms-flexbox;
 display: flex;
 align-items: center;
-justify-content: space-between;
 padding: 30px;
 transition: 350ms ease-in-out;
 box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
@@ -309,6 +308,8 @@ display: none;
 display: block;
 position: relative;
 flex-shrink: 0;
+margin-right: 20px;
+margin-left: auto;
 width: 18px;
 height: 18px;
 padding: 3px;
@@ -344,6 +345,10 @@ stroke-dashoffset: 0;
 }
 }
 
+.trash {
+  height: 25px;
+  width: auto;
+}
 
 /*--------------------------------------------------------------
 ## Modal
@@ -397,5 +402,24 @@ opacity: 1;
 }
 
 .wrap > ul {
+  list-style: none;
+}
+
+.archive-btn {
+  display: flex;
+  align-items: center;
+}
+
+.archive-label {
+  color: #666;
+  font-weight: 400;
+}
+
+.archive-arrow {
+  height: 25px;
+  margin-left: 10px;
+}
+
+.archive-items > ul {
   list-style: none;
 }
