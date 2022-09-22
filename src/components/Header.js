@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import plus from './../icons/icon-plus.svg';
 import logo from '../images/vegait-logo.svg';
 import calendar from './../icons/icon-calendar.svg';
@@ -14,29 +14,34 @@ function Header({buttonClick})
         var mm = String(today.getMonth() + 1).padStart(2, '0');
         var yyyy = today.getFullYear();
 
-        today = mm + '/' + dd + '/' + yyyy;
+        today = dd + '/' + mm + '/' + yyyy;
         return today.toString();
     }
-    var rand = Math.floor(Math.random() * 8);
-    var quote = quotes[rand];
-    var cite = cites[rand];
+
+	const [quote, setQuote] = useState("")
+	const [cite, setCite] = useState("")
+	useEffect(() => {
+		var rand = Math.floor(Math.random() * 8);
+		setQuote(quotes[rand])
+		setCite(cites[rand])
+	}, [])
     
     return(
-        <header class="header">
-			<div class="wrap">
-				<button class="btn-icon" onClick={buttonClick}>
-					<img class="icon icon-plus js-modal-init" src={plus} alt="Add New Item"/>
+        <header className="header">
+			<div className="wrap">
+				<button className="btn-icon" onClick={buttonClick}>
+					<img className="icon icon-plus js-modal-init" src={plus} alt="Add New Item"/>
 				</button>
-				<div class="header-blockquote">
-					<h1 class="header-quote">{quote}</h1>
-					<div class="header-cite">{cite}</div>
+				<div className="header-blockquote">
+					<h1 className="header-quote">{quote}</h1>
+					<div className="header-cite">{cite}</div>
 				</div>
 			</div>
-			<div class="header-inner">
-				<div class="wrap">
-					<img class="logo" src={logo} alt="VegaIT"/>
-					<div class="date-wrap">
-						<img class="icon" src={calendar} alt="Calendar"/>
+			<div className="header-inner">
+				<div className="wrap">
+					<img className="logo" src={logo} alt="VegaIT"/>
+					<div className="date-wrap">
+						<img className="icon" src={calendar} alt="Calendar"/>
 						<time>{getTime()}</time>
 					</div>
 				</div>
